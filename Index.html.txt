@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Search Engine</title>
+<style>
+body{
+    font-family: Arial;
+    background:#0b132b;
+    color:white;
+    text-align:center;
+    margin-top:150px;
+}
+
+input{
+    width:400px;
+    padding:12px;
+    font-size:18px;
+    border-radius:10px;
+    border:none;
+}
+
+button{
+    padding:12px 20px;
+    font-size:18px;
+    border:none;
+    border-radius:10px;
+    background:#3a86ff;
+    color:white;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h1>My Search Engine</h1>
+
+<input id="searchBox" placeholder="Search the web...">
+<button onclick="search()">Search</button>
+
+<script>
+function search(){
+    let query = document.getElementById("searchBox").value;
+    window.location.href = "https://www.google.com/search?q=" + query;
+}
+</script>
+
+</body>
+</html>
