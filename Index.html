@@ -1,50 +1,33 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-<title>My Search Engine</title>
-<style>
-body{
-    font-family: Arial;
-    background:#0b132b;
-    color:white;
-    text-align:center;
-    margin-top:150px;
-}
-
-input{
-    width:400px;
-    padding:12px;
-    font-size:18px;
-    border-radius:10px;
-    border:none;
-}
-
-button{
-    padding:12px 20px;
-    font-size:18px;
-    border:none;
-    border-radius:10px;
-    background:#3a86ff;
-    color:white;
-    cursor:pointer;
-}
-</style>
+  <title>Proxy Search</title>
 </head>
-
 <body>
+  <h1>Proxy Search</h1>
 
-<h1>My Search Engine</h1>
+  <input id="search" placeholder="Search..." />
+  <button onclick="search()">Search</button>
 
-<input id="searchBox" placeholder="Search the web...">
-<button onclick="search()">Search</button>
+  <div id="results"></div>
 
 <script>
-function search(){
-    let query = document.getElementById("searchBox").value;
-    window.location.href = "https://www.google.com/search?q=" + query;
+async function search(){
+  let q = document.getElementById("search").value;
+
+  let res = await fetch(`/api/search?q=${encodeURIComponent(q)}`);
+  let data = await res.json();
+
+  let html = "";
+
+  data.results.forEach(r => {
+    html += `<p>
+      <a href="/proxy?url=${encodeURIComponent(r.url)}">${r.title}</a>
+    </p>`;
+  });
+
+  document.getElementById("results").innerHTML = html;
 }
 </script>
-
 </body>
 </html>
